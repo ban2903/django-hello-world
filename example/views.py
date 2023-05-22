@@ -1,16 +1,25 @@
 # example/views.py
 from datetime import datetime
 
-from django.http import HttpResponse
+from django.shortcuts import render
 
 def index(request):
-    now = datetime.now()
-    html = f'''
-    <html>
-        <body>
-            <h1>Hello from Vercel!</h1>
-            <p>The current time is { now }.</p>
-        </body>
-    </html>
-    '''
-    return HttpResponse(html)
+    print(request.method)
+    if request.method == 'POST':
+        result = {
+            "url": request.POST['url'],
+            "values": [{
+                "key": "date",
+                "value": "2021-10-10"
+            }, {
+                "key": "date",
+                "value": "2021-10-10"
+            }, {
+                "key": "date",
+                "value": "2021-10-10"
+            }]
+        }
+
+        return render(request, 'index.html', {'result': result})
+    
+    return render(request, 'index.html', { 'result': '' })
