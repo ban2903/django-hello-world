@@ -25,6 +25,6 @@ def index(request):
         }
 
         return render(request, 'index.html', {'result': result})
-    score = model(result['url'])
+    score = model.predict(result['url'])
     result['score'] = score
     return render(request, 'index.html', { 'result': '' })
